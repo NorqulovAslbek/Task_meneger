@@ -1,0 +1,22 @@
+             __Task Manager  Console Program__
+
+Task
+(id(serial),title,content(text),status(varchar),created_date(timestamp),finished_date(timestamp))
+
+status - TaskStatus - Enum
+ACTIVE,DONE
+
+***** Menu *****
+1-Create
+    Enter title:
+    Enter content:
+2-Active Task List
+3-Finished Task List
+4-Update (by id)
+    Enter Task Id:
+    Enter Title:
+    Enter Content:
+5-Delete by id:
+    Enter Delete Task Id:
+6-Mark as Done:
+    Enter Task Id To Mark it as Done:
