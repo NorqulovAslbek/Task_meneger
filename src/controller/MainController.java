@@ -10,6 +10,9 @@ import java.util.Scanner;
 
 
 public class MainController {
+    public static final String RED = "\u001B[31m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String ANSI_RESET = "\u001B[0m";
     private Scanner scannerString = new Scanner(System.in);
     private Scanner scannerInt = new Scanner(System.in);
     private TaskService taskService = new TaskService();
@@ -64,13 +67,73 @@ public class MainController {
     }
 
     private void finishedTask() {
-        List<Task> activeTask = taskService.finishedTask();
-        System.out.println(activeTask);
+        List<Task> taskList = taskService.finishedTask();
+        int count = 0;
+        System.out.println(BLUE + "---------------------------------------------------------------------------------------------------------------" + ANSI_RESET);
+        System.out.print(BLUE + "| " + ANSI_RESET + RED + "id" + ANSI_RESET + BLUE + " |" + ANSI_RESET + RED + "    Content     " + ANSI_RESET + BLUE + "|      " + ANSI_RESET);
+        System.out.print(RED + "  Title           " + ANSI_RESET + BLUE + "|      " + ANSI_RESET);
+        System.out.print(RED + "   Created_date         " + ANSI_RESET + BLUE + "|        " + ANSI_RESET);
+        System.out.println(RED + "Finished_date" + ANSI_RESET + BLUE + "          |   " + ANSI_RESET);
+        System.out.print(BLUE + "---------------------------------------------------------------------------------------------------------------\n" + ANSI_RESET);
+        for (Task task : taskList) {
+            count = task.getId();
+            System.out.print(BLUE + "|" + (count <= 9 ? (" " + RED + count + ANSI_RESET + "  ") : (count > 9 & count < 100) ? ("|" + RED + count + ANSI_RESET + " ") : ("|" + RED + count + ANSI_RESET)) + ANSI_RESET);
+            System.out.print(BLUE + "|   " + ANSI_RESET + RED + task.getContent() + ANSI_RESET);
+            for (int i = 0; i < 20 - ("|    " + task.getContent()).length() - 2; i++) {
+                System.out.print(" ");
+            }
+            System.out.print(BLUE + "|    " + ANSI_RESET + RED + task.getTitle() + ANSI_RESET);
+            for (int i = 0; i < 20 - ("|" + task.getTitle()).length() - 5; i++) {
+                System.out.print(" ");
+            }
+            System.out.print(BLUE + "      |  " + ANSI_RESET + RED + task.getCreated_date() + ANSI_RESET);
+            for (int i = 0; i < 20 - ("|  " + task.getCreated_date()).length() - 6; i++) {
+                System.out.print(" ");
+            }
+            System.out.print(BLUE + "  |   " + ANSI_RESET + RED +task.getFinished_date() + ANSI_RESET);
+            for (int i = 0; i < 20 - ("|  " + task.getCreated_date()).length() - 3; i++) {
+                System.out.print(" ");
+            }
+            System.out.print(BLUE + "  |\n" + ANSI_RESET);
+            System.out.println(BLUE + "---------------------------------------------------------------------------------------------------------------" + ANSI_RESET);
+
+        }
+
     }
 
     private void activeTaskList() {
-        List<Task> activeTask = taskService.activeTasks();
-        System.out.println(activeTask);
+        List<Task> taskList = taskService.activeTasks();
+        int count = 0;
+        System.out.println(BLUE + "-------------------------------------------------------------------------------------------------" + ANSI_RESET);
+        System.out.print(BLUE + "| " + ANSI_RESET + RED + "id" + ANSI_RESET + BLUE + " |" + ANSI_RESET + RED + "    Content     " + ANSI_RESET + BLUE + "|      " + ANSI_RESET);
+        System.out.print(RED + "  Title           " + ANSI_RESET + BLUE + "|      " + ANSI_RESET);
+        System.out.print(RED + "   Created_date         " + ANSI_RESET + BLUE + "|  " + ANSI_RESET);
+        System.out.println(RED + "Finished_date" + ANSI_RESET + BLUE + "  |   " + ANSI_RESET);
+        System.out.print(BLUE + "-------------------------------------------------------------------------------------------------\n" + ANSI_RESET);
+        for (Task task : taskList) {
+            count = task.getId();
+            System.out.print(BLUE + "|" + (count <= 9 ? (" " + RED + count + ANSI_RESET + "  ") : (count > 9 & count < 100) ? ("|" + RED + count + ANSI_RESET + " ") : ("|" + RED + count + ANSI_RESET)) + ANSI_RESET);
+            System.out.print(BLUE + "|   " + ANSI_RESET + RED + task.getContent() + ANSI_RESET);
+            for (int i = 0; i < 20 - ("|    " + task.getContent()).length() - 2; i++) {
+                System.out.print(" ");
+            }
+            System.out.print(BLUE + "|    " + ANSI_RESET + RED + task.getTitle() + ANSI_RESET);
+            for (int i = 0; i < 20 - ("|" + task.getTitle()).length() - 5; i++) {
+                System.out.print(" ");
+            }
+            System.out.print(BLUE + "      |  " + ANSI_RESET + RED + task.getCreated_date() + ANSI_RESET);
+            for (int i = 0; i < 20 - ("|  " + task.getCreated_date()).length() - 6; i++) {
+                System.out.print(" ");
+            }
+            System.out.print(BLUE + "  |   " + ANSI_RESET + RED +"  null" + ANSI_RESET);
+            for (int i = 0; i < 10-2; i++) {
+                System.out.print(" ");
+            }
+            System.out.print(BLUE + "|\n" + ANSI_RESET);
+            System.out.println(BLUE + "-------------------------------------------------------------------------------------------------" + ANSI_RESET);
+
+        }
+
     }
 
     private void createTask() {
